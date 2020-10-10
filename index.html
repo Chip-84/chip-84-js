@@ -1,0 +1,33 @@
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="helper.js"></script>
+	<script src="chip8.js"></script>
+	<script src="main.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>Chip-84</title>
+</head>
+<body>
+	<div id="container">
+		<!--<h1 style="width: 100%; text-align: center; font-size: 64; padding-top: 50px;">Chip-84</h1>-->
+		<img src="title.png" style="width:512px"></img>
+		<br>
+		<canvas id="screen" width="128", height="64"></canvas>
+		<br>
+		<label class="rom-upload" style="margin-top:20px; margin-bottom:20px;">
+			<input type="file" id="fileselector" name="fileselector">
+			Choose a ROM...
+		</label>
+		<br>
+		Cycles Per Frame:
+		<input type="range" min="1" max="100" value="20" id="cpf-slider" name="cpfRange" oninput="this.nextElementSibling.value=this.value">
+		<input type="number" min="1" max="3000" value="20" id="cpf-input" name="cpfInput" oninput="this.previousElementSibling.value=this.value">
+		
+		<div id="text-container">
+			<h2>What is Chip-84?</h2>
+			<p>Chip-84 is a CHIP-8 and S-CHIP (Super-Chip) interpreter originally written in C for the TI-84 Plus CE calculator.  Since then, it's been a task of porting it to as many platforms as possible.</p>
+			<p>The list of ports extends from practical platforms like SDL for Windows and Linux to completely pointless ones like an addon for Garry's Mod or a Rainmeter skin.  You can think of it as the "itrunsdoom" project where porting a specific thing to as many devices as possible is a fun activity and a great way to learn about the hardware/software of the device it's running on.</p>
+		</div>
+	</div>
+</body>
+</html>
