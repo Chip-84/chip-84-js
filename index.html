@@ -10,7 +10,7 @@
 <body>
 	<div id="container">
 		<!--<h1 style="width: 100%; text-align: center; font-size: 64; padding-top: 50px;">Chip-84</h1>-->
-		<img src="title.png" style="width:512px"></img>
+		<img src="title.png" style="width:512px" id="title-img"></img>
 		<br>
 		<canvas id="screen" width="128", height="64"></canvas>
 		<br>
@@ -18,6 +18,24 @@
 			<input type="file" id="fileselector" name="fileselector">
 			Choose a ROM...
 		</label>
+		<select name="roms" id="roms" onchange="presetRom()">
+			<option value="schip8/ANT">ANT</option>
+			<option value="schip8/BLINKY">BLINKY</option>
+			<option value="BRIX">BRIX</option>
+			<option value="C2048">C2048</option>
+			<option value="schip8/C8SCRATC">C8SCRATC</option>
+			<option value="schip8/C83DTITL">C83DTITL</option>
+			<option value="schip8/C84JS" selected>C84JS</option>
+			<option value="schip8/CAR">CAR</option>
+			<option value="CKOSMIC">CKOSMIC</option>
+			<option value="INVADERS">INVADERS</option>
+			<option value="PONG2">PONG2</option>
+			<option value="schip8/SNOWDAZE">SNOWDAZE</option>
+			<option value="schip8/SPACEFIG">SPACEFIG</option>
+			<option value="schip8/SWEECOPT">SWEECOPT</option>
+			<option value="schip8/TRAFFIC">TRAFFIC</option>
+			<option value="TETRIS">TETRIS</option>
+		</select>
 		<br>
 		Cycles Per Frame:
 		<input type="range" min="1" max="100" value="20" id="cpf-slider" name="cpfRange" oninput="this.nextElementSibling.value=this.value">
@@ -27,7 +45,43 @@
 			<h2>What is Chip-84?</h2>
 			<p>Chip-84 is a CHIP-8 and S-CHIP (Super-Chip) interpreter originally written in C for the TI-84 Plus CE calculator.  Since then, it's been a task of porting it to as many platforms as possible.</p>
 			<p>The list of ports extends from practical platforms like SDL for Windows and Linux to completely pointless ones like an addon for Garry's Mod or a Rainmeter skin.  You can think of it as the "itrunsdoom" project where porting a specific thing to as many devices as possible is a fun activity and a great way to learn about the hardware/software of the device it's running on.</p>
+			<h2>List of Ports</h2>
+			<ul>
+				<li>Chip-84 - TI-84 Plus CE (<a href="https://github.com/Chip-84/chip-84" target="_blank">Source</a>, <a href="https://github.com/Chip-84/chip-84/releases" target="_blank">Binary</a>)</li>
+				<li>Chip-84 SDL Edition - Windows/Linux (<a href="https://github.com/Chip-84/chip-84-sdl" target="_blank">Source</a>)</li>
+				<li>Chip-84 3D - Unity (<a href="https://github.com/Chip-84/chip-84-3d" target="_blank">Source</a>, <a href="https://tripleaxis.itch.io/chip-84-3d" target="_blank">Binary</a>)</li>
+				<li>Chip-84 DS Edition - Nintendo DS (<a href="https://github.com/Chip-84/chip-84-ds" target="_blank">Source</a>, <a href="https://github.com/Chip-84/chip-84-ds/releases" target="_blank">Binary</a>)</li>
+				<li>Chip-84 Rainmeter Edition - Rainmeter (<a href="https://github.com/Chip-84/chip-84-rainmeter" target="_blank">Source</a>, <a href="https://github.com/Chip-84/chip-84-rainmeter/releases" target="_blank">Binary</a>)</li>
+				<li>Chip-84 PSX Edition - PlayStation 1 (<a href="https://github.com/Chip-84/chip-84-psx" target="_blank">Source</a>, <a href="https://github.com/Chip-84/chip-84-psx/releases" target="_blank">Binary</a>)</li>
+				<li>Chip-84 Pi Edition - Raspberry Pi Zero W (<a href="https://github.com/Chip-84/chip-84-pi" target="_blank">Source</a>)</li>
+				<li>Chip-84 JavaScript Edition - Web (<a href="https://github.com/Chip-84/chip-84.github.io" target="_blank">Source</a>)</li>
+			</ul>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+	function presetRom() {
+		setFileName(document.getElementById("roms").value);
+	
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "rom/" + document.getElementById("roms").value, true);
+		xhr.responseType = "arraybuffer";
+		
+		xhr.onload = function(e) {
+			var arrayBuffer = xhr.response;
+			if(arrayBuffer) {
+				var array = new Uint8Array(arrayBuffer);
+				loadProgram(array);
+				startMainLoop();
+			}
+		};
+		
+		xhr.send(null);
+	}
+	
+	setTimeout(function() {
+		presetRom();
+	}, 1000);
+	</script>
 </body>
 </html>

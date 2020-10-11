@@ -3,6 +3,8 @@ var cpf = 20;
 var c;
 var ctx;
 var SCREEN_SCALE = 4;
+var fileName = "";
+var titleFlag = 0;
 
 window.onload = function() {
 	document.getElementById('fileselector').addEventListener('change', function() {
@@ -47,7 +49,17 @@ function startMainLoop() {
 			var y = Math.floor(i / screen_width);
 			ctx.fillRect(x * ss, y * ss, ss, ss);
 		}
+		
+		// Cosmetic
+		if(titleFlag == 0 && fileName === "schip8/C84JS" && V[4] == 4 && V[5] == 5 && V[6] == 6 && V[2] == 7) {
+			titleFlag = 1;
+			doTitleAnim();
+		}
 	}, 1000/60);
+}
+
+function setFileName(fn) {
+	fileName = fn;
 }
 
 function keyDown(e) {
@@ -150,6 +162,20 @@ function keyUp(e) {
 	if(e.keyCode == 86) {
 		keys[0xf] = 0;
 	}
+}
+
+function doTitleAnim() {
+	var img = document.getElementById("title-img");
+	var margin = 178;
+	img.style.display = "block";
+	var interval = setInterval(function() {
+		if(margin <= 0) {
+			margin = 0;
+			clearInterval(interval);
+		}
+		img.style.marginTop = "" + margin + "px";
+		margin -= 8;
+	}, 1000/20);
 }
 
 

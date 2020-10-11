@@ -129,6 +129,18 @@ function emulateCycle(steps) {
 						
 						break;
 					}
+					case 0x00d0: {
+						var n = (opcode & 0x000f);
+						
+						drawFlag = true;
+						
+						for(i = 0; i < screen_height - 2; i++) {
+							memcpy2(canvas_data, i * screen_width, canvas_data, (i + n) * screen_width, screen_width);
+							canvas_data.fill(0, (i + n) * screen_width, (i + n) * screen_width + screen_width);
+						}
+						
+						break;
+					}
 					break;
 				}
 				switch(opcode & 0x00ff) {

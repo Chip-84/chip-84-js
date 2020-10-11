@@ -24,15 +24,6 @@ h2 {
 	text-shadow: 3px 3px 0px black;
 }
 
-#container {
-	width: 70%;
-	min-width: 50%;
-	margin: auto;
-	background-color: #222;
-	height: 100%;
-	text-align:center;
-}
-
 input[type=file] {
 	display:none;
 }
@@ -42,6 +33,47 @@ input[type=number] {
 	color: white;
 	font-family: DOS;
 	font-size: 16;
+}
+
+a {
+	color: #4287f5;
+}
+
+select {
+	background-color: black;
+	border: 1px solid white;
+	color: white;
+	font-family: DOS;
+	font-size: 16;
+	padding: 4px 7px;
+}
+
+#container {
+	width: 70%;
+	min-width: 50%;
+	margin: auto;
+	background-color: #222;
+	height: 100%;
+	text-align: center;
+	display: table;
+}
+
+#title-img {
+	width: 512px;
+	position: absolute;
+	margin-top: 0px;
+	left: 50%;
+	right: 50%;
+	margin-left: -256px;
+	margin-right: -256px;
+	margin-top: 178px;
+	display: none;
+}
+
+#screen {
+	margin-top: 216px;
+	z-index: 100;
+	position: relative;
 }
 
 .rom-upload {
