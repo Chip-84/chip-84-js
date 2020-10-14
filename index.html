@@ -44,7 +44,7 @@
 		<div id="text-container">
 			<h2>What is Chip-84?</h2>
 			<p>Chip-84 is a CHIP-8 and S-CHIP (Super-Chip) interpreter originally written in C for the TI-84 Plus CE calculator.  Since then, it's been a task of porting it to as many platforms as possible.</p>
-			<p>The list of ports extends from practical platforms like SDL for Windows and Linux to completely pointless ones like an addon for Garry's Mod or a Rainmeter skin.  You can think of it as the "itrunsdoom" project where porting a specific thing to as many devices as possible is a fun activity and a great way to learn about the hardware/software of the device it's running on.</p>
+			<p>The list of ports extends from practical platforms like SDL for Windows and Linux to completely pointless ones like an addon for Garry's Mod or a Rainmeter skin.  You can think of it as the "Can it Run Doom?" project where porting a specific thing to as many devices as possible is a fun activity and a great way to learn about the hardware/software of the device it's running on.</p>
 			<h2>List of Ports</h2>
 			<ul>
 				<li>Chip-84 - TI-84 Plus CE (<a href="https://github.com/Chip-84/chip-84" target="_blank">Source</a>, <a href="https://github.com/Chip-84/chip-84/releases" target="_blank">Binary</a>)</li>
@@ -55,8 +55,41 @@
 				<li>Chip-84 PSX Edition - PlayStation 1 (<a href="https://github.com/Chip-84/chip-84-psx" target="_blank">Source</a>, <a href="https://github.com/Chip-84/chip-84-psx/releases" target="_blank">Binary</a>)</li>
 				<li>Chip-84 Pi Edition - Raspberry Pi Zero W (<a href="https://github.com/Chip-84/chip-84-pi" target="_blank">Source</a>)</li>
 				<li>Chip-84 JavaScript Edition - Web (<a href="https://github.com/Chip-84/chip-84.github.io" target="_blank">Source</a>)</li>
+				<li>Chip-84 Scratch Edition - Scratch (<a href="https://scratch.mit.edu/projects/225072554/editor/" target="_blank">Source</a>)</li>
 			</ul>
+			<h2>Gallery</h2>
+			<div class="img-gallery">
+				<div class="img-column">
+					<img src="images/calc1.jpeg" onclick="openImg(this.src, 'The original Chip-84 on the TI-84 Plus CE')">
+					<img src="images/ds3.jpeg" onclick="openImg(this.src, 'Chip-84 on the Nintendo DS')">
+					<img src="images/sdl1.jpg" onclick="openImg(this.src, 'Chip-84 ported to run using SDL on Windows and Linux')">
+					<img src="images/calc3.gif" onclick="openImg(this.src, 'The original Chip-84 on the TI-84 Plus CE')">
+				</div>
+				<div class="img-column">
+					<img src="images/calc2.jpeg" onclick="openImg(this.src, 'The original Chip-84 on the TI-84 Plus CE')">
+					<img src="images/pi1.jpeg" onclick="openImg(this.src, 'Chip-84 running on the Raspberry Pi Zero W')">
+					<img src="images/ds2.jpeg" onclick="openImg(this.src, 'Chip-84 on the Nintendo DS')">
+					<img src="images/3d1.png" onclick="openImg(this.src, 'Chip-84 running in Unity')">
+					<img src="images/rainmeter1.jpg" onclick="openImg(this.src, 'Chip-84 as a Rainmeter skin')">
+				</div>
+				<div class="img-column">
+					<img src="images/ds1.jpeg" onclick="openImg(this.src, 'Chip-84 on the Nintendo DS')">
+					<img src="images/pi2.jpeg" onclick="openImg(this.src, 'Chip-84 running on the Raspberry Pi Zero W')">
+					<img src="images/ps1.jpg" onclick="openImg(this.src, 'Chip-84 running on the Sony PlayStation')">
+					<img src="images/scratch1.jpg" onclick="openImg(this.src, 'Chip-84 running in Scratch, a beginner programming tool for kids')">
+					<img src="images/ps12.jpg" onclick="openImg(this.src, 'Chip-84 running on a Sony PlayStation emulator called NO$PSX')">
+					
+				</div>
+			</div>
 		</div>
+	</div>
+	
+	<div id="img-viewer" style="display:none">
+		<div id="img-container">
+			<img src="" id="img-viewed">
+		</div>
+		<div id="img-viewer-x" onclick="closeImg()">&#x2715;</div>
+		<div id="img-viewer-cap">sdsdsdsd</div>
 	</div>
 	
 	<script type="text/javascript">
@@ -82,6 +115,31 @@
 	setTimeout(function() {
 		presetRom();
 	}, 1000);
+	
+	function openImg(src, caption) {
+		var viewer = document.getElementById("img-viewer");
+		var viewed = document.getElementById("img-viewed");
+		var cap = document.getElementById("img-viewer-cap");
+		viewed.src = src;
+		viewer.style.display = "block";
+		
+		var img = new Image();
+		img.onload = function() {
+			if(this.height > this.width || this.height > window.innerHeight*0.8) {
+				viewed.style.height = "80%";
+			}
+		}
+		img.src = src;
+		
+		cap.innerHTML = caption;
+	}
+	
+	function closeImg() {
+		var viewer = document.getElementById("img-viewer");
+		var viewed = document.getElementById("img-viewed");
+		viewed.src = "";
+		viewer.style.display = "none";
+	}
 	</script>
 </body>
 </html>
